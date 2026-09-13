@@ -1,0 +1,344 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+
+  --pokeball-red: #dc2626;
+  --pokeball-red-dark: #991b1b;
+  --ink: #1c1917;
+  --paper: #fafaf9;
+  --card: #ffffff;
+  --border: #e7e5e4;
+  --muted: #78716c;
+  --focus: #2563eb;
+
+  --cat-beauty: #db2777;
+  --cat-cool: #2563eb;
+  --cat-cute: #ec4899;
+  --cat-smart: #16a34a;
+  --cat-tough: #d97706;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --ink: #f5f5f4;
+    --paper: #1c1917;
+    --card: #292524;
+    --border: #44403c;
+    --muted: #a8a29e;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+#app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0 1.5rem;
+  border-bottom: 3px solid var(--pokeball-red);
+  margin-bottom: 1.5rem;
+}
+
+.app-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.pokeball-icon {
+  display: inline-block;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background:
+    radial-gradient(circle at center, var(--paper) 0 18%, var(--ink) 18% 22%, transparent 22%),
+    linear-gradient(var(--ink), var(--ink)) center / 100% 12% no-repeat,
+    linear-gradient(to bottom, var(--pokeball-red) 0 50%, var(--paper) 50% 100%);
+  border: 2px solid var(--ink);
+}
+
+.gen-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: var(--pokeball-red);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 560px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.field select,
+.combobox input {
+  font: inherit;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--ink);
+  width: 100%;
+}
+
+.field select:focus,
+.combobox input:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 25%, transparent);
+}
+
+.combobox {
+  position: relative;
+}
+
+.combobox-dropdown {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  right: 0;
+  max-height: 16rem;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0.25rem;
+  list-style: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.combobox-dropdown li {
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.35rem;
+  cursor: pointer;
+}
+
+.combobox-dropdown li.highlighted,
+.combobox-dropdown li:hover {
+  background: var(--pokeball-red);
+  color: #fff;
+}
+
+.combobox-dropdown li.combobox-empty {
+  color: var(--muted);
+  cursor: default;
+}
+
+.combobox-dropdown li.combobox-empty:hover {
+  background: none;
+  color: var(--muted);
+}
+
+.panel {
+  margin-bottom: 2rem;
+}
+
+.panel h2 {
+  font-size: 1.1rem;
+  border-left: 4px solid var(--pokeball-red);
+  padding-left: 0.5rem;
+  margin: 0 0 0.75rem;
+}
+
+.empty-state,
+.move-count {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.combo-note {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 0 0 0.75rem;
+  max-width: 60ch;
+}
+
+.combo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.combo-card {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+}
+
+.combo-card:hover {
+  border-color: var(--pokeball-red);
+}
+
+.combo-card:focus-visible {
+  outline: 2px solid var(--pokeball-red);
+  outline-offset: 2px;
+}
+
+.combo-expand-icon {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.combo-accordion {
+  flex-basis: 100%;
+  margin-top: 0.4rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--border);
+}
+
+.combo-accordion .move-table {
+  font-size: 0.8rem;
+}
+
+.combo-rank {
+  flex-shrink: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--pokeball-red);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.combo-moves {
+  flex: 1;
+}
+
+.combo-score {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--pokeball-red-dark);
+}
+
+.combo-move--match {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--pokeball-red);
+  text-decoration-thickness: 2px;
+}
+
+.combo-move--conditional {
+  font-style: italic;
+}
+
+.condition-flag {
+  color: var(--pokeball-red);
+  font-weight: 700;
+}
+
+.combo-arrow {
+  color: var(--muted);
+}
+
+.combo-card--conditional {
+  flex-wrap: wrap;
+  border-style: dashed;
+}
+
+.combo-conditions {
+  flex-basis: 100%;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.move-table-wrap {
+  overflow-x: auto;
+}
+
+.move-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.move-table th {
+  text-align: left;
+  color: var(--muted);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.move-row {
+  border-left: 4px solid transparent;
+}
+
+.move-row td {
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.move-row--beauty { border-left-color: var(--cat-beauty); }
+.move-row--cool { border-left-color: var(--cat-cool); }
+.move-row--cute { border-left-color: var(--cat-cute); }
+.move-row--smart { border-left-color: var(--cat-smart); }
+.move-row--tough { border-left-color: var(--cat-tough); }
+
+.move-category {
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.move-points {
+  color: var(--pokeball-red-dark);
+  white-space: nowrap;
+}

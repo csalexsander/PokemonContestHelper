@@ -1,0 +1,14 @@
+node_modules
+dist
+coverage
+.vscode
+*.local
+.DS_Store
+*.tsbuildinfo
+.env
+.env.*
+
+# BMad workflow files — not part of the shipped app
+_bmad/
+_bmad-output/
+.claude/
